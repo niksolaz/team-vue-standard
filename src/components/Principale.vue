@@ -1,12 +1,9 @@
 <template>
-    <div class="container">
+    <div id="principale" class="container">
         <div class="row">
             <Destinazioni class="col-6"/>
             <PannelloMosart class="col-3" />
             <DebugPannel  class="col-3"/>
-        </div>
-        <div class="d-flex justify-content-center my-2">
-            <button class="btn btn-primary">Click</button>
         </div>
     </div>
 </template>
@@ -26,4 +23,7 @@ export default {
 </script>
 
 <style scoped>
+    #principale {
+        border: 3px solid red;
+    }
 </style>

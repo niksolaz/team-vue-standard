@@ -1,6 +1,6 @@
 <template>
-    <div>
-        Debug Pannel
+    <div id="debugpannel"  class="d-flex justify-content-center">
+        <p>Debug Pannel</p>
     </div>
 </template>
 
@@ -10,5 +10,7 @@ export default {
 </script>
 
 <style scoped>
-
+    #debugpannel {
+        border: 1px solid black;
+    }
 </style>
