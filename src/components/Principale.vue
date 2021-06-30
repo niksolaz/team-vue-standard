@@ -1,8 +1,8 @@
 <template>
-    <div id="team">
-        <Destinazioni />
-        <PannelloMosart />
-        <DebugPannel />
+    <div id="team" class="row">
+        <Destinazioni class="col-6" />
+        <PannelloMosart class="col-3" />
+        <DebugPannel class="col-3" />
     </div>
 </template>
 
@@ -21,5 +21,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
