@@ -1,57 +1,44 @@
 <template>
-    <div id="destinazioni" class="my-5">
-        <div class="mod mt-3">
-            <h6 class="title text-left">Destinazioni</h6>
-            <div class="d-flex align-items-center mx-1 my-3">
-                <label for="area1">
-                    <span class="px-1">Ledwall:</span>
-                </label>
-                <select name="area1" id="area1" class="form-select mb-1" aria-label="Default select example" v-model="destination" @change="selectArea(destination)">
-                    <option selected value="0">...</option>
-                    <option value="1">Area 1-2</option>
-                    <option value="3">Area 3</option>
-                    <option value="4">Area 4</option>
-                    <option value="5">Area 5</option>
-                </select>
-            </div>
-        </div>
-        <div class="mod my-3" v-if="area1">
-            <h6 class="title text-left">A1 - A2</h6>
-            <div class="d-flex mt-3">
-                <img class="mx-auto mb-3" src="../assets/images/gray.png" alt="img-1" width="50" height="50">
-                <img class="mx-auto mb-3" src="../assets/images/gray.png" alt="img-2" width="50" height="50">
-                <img class="mx-auto mb-3" src="../assets/images/gray.png" alt="img-3" width="50" height="50">
-                <img class="mx-auto mb-3" src="../assets/images/gray.png" alt="img-4" width="50" height="50">
-            </div>
-        </div>
-        <div class="mod" v-if="area3">
-            <h6 class="title text-left">A3</h6>
-            <div class="mx-1 my-3">
-                <div class="input-group mb-3">
-                    <label class="input-group-text" for="inputGroupSelect01">Nome Team:</label>
-                    <select class="form-select" id="inputGroupSelect01">
-                        <option selected>Choose...</option>
-                        <option value="1">Inter</option>
-                        <option value="2">Milan</option>
-                        <option value="3">Juventus</option>
-                        <option value="4">Napoli</option>
-                        <option value="5">Roma</option>
-                        <option value="6">Atalanta</option>
+    <div id="destinazioni" class="position-relative">
+        <div class="mod">
+            <div class="mt-3">
+                <h6 class="title text-start">Destinazioni</h6>
+                <div class="d-flex align-items-center mx-1 my-3">
+                    <label for="area1">
+                        <span class="px-1">Ledwall:</span>
+                    </label>
+                    <select name="area1" id="area1" class="form-select mb-1" aria-label="Default select example" v-model="destination" @change="selectArea(destination)">
+                        <option selected value="0">...</option>
+                        <option value="1">Area 1-2</option>
+                        <option value="3">Area 3</option>
+                        <option value="4">Area 4</option>
+                        <option value="5">Area 5</option>
                     </select>
                 </div>
             </div>
+            <Area1 v-if="area1" name="A1-A2"/>
+            <Area3 v-if="area3" name="A3"/>
+            <Area4 v-if="area4" name="A4"/>
+            <Area5 v-if="area5" name="A5"/>
         </div>
-        <div class="mod" v-if="area4">
-            <h6 class="title text-left">A4</h6>
-        </div>
-        <div class="mod" v-if="area5">
-            <h6 class="title text-left">A5</h6>
+        <div class="d-flex flex-row-reverse bd-highlight border position-absolute bottom-0 end-0">
+            <div>Release</div>
         </div>
     </div>
 </template>
 
 <script>
+import Area1 from './Area1'
+import Area3 from './Area3'
+import Area4 from './Area4'
+import Area5 from './Area5'
 export default {
+    components: {
+        Area1,
+        Area3,
+        Area4,
+        Area5
+    },
     data() {
         return {
             destination: "0",
@@ -100,7 +87,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     #destinazioni {
         
     }
