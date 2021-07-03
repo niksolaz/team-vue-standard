@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         users: [],
-        posts: []
+        posts: [],
+        albums: []
     },
     mutations: {
         setUsers(state, users) {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
         },
         setPosts(state, posts) {
             state.posts = posts
+        },
+        setAlbums(state, albums) {
+            state.albums = albums
         }
     },
     actions: {
@@ -45,7 +49,22 @@ export default new Vuex.Store({
             } else {
                 postsContext.commit('setPosts', posts)
             }
-        }
+        },
+        getAlbums(albumsContext, albums) {
+            if (sessionStorage.getItem('albums') === null) {
+                return axios.get('https://jsonplaceholder.typicode.com/albums/')
+                    .then(res => {
+                        sessionStorage.setItem('albums', JSON.stringify(res.data))
+                        albumsContext.commit('setAlbums', res.data)
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    })
+            } else {
+                albumsContext.commit('setAlbums', albums)
+            }
+        },
+
     },
     getters: {
         getUsers(state) {
@@ -53,6 +72,9 @@ export default new Vuex.Store({
         },
         getPosts(state) {
             return state.posts;
+        },
+        getAlbums(state) {
+            return state.albums;
         }
     }
 })

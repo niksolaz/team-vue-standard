@@ -8,6 +8,9 @@
       <div class="col-6">
         <div v-for="(post,j) in donePosts" :key="j">{{post}}</div>
       </div>
+      <div class="col-12">
+        <div v-for="(album,k) in doneAlbums" :key="k">{{album}}</div>
+      </div>
     </div>
 
   </div>
@@ -22,14 +25,14 @@ export default {
     Principale
   },
   beforeMount() {
-    store.dispatch('getUsers');
-    store.dispatch('getPosts');
+    const itemsUsers = sessionStorage.getItem('users');
+    store.dispatch('getUsers',JSON.parse(itemsUsers));
+    const itemsPosts = sessionStorage.getItem('posts');
+    store.dispatch('getPosts',JSON.parse(itemsPosts));
+    const itemsAlbums = sessionStorage.getItem('albums');
+    store.dispatch('getAlbums',JSON.parse(itemsAlbums));
   },
   mounted() {
-    const itemsUsers = sessionStorage.getItem('users');
-    store.commit('setUsers', JSON.parse(itemsUsers));
-    const itemsPosts = sessionStorage.getItem('posts');
-    store.commit('setPosts', JSON.parse(itemsPosts));
   },
   computed: {
     doneUsers() {
@@ -39,6 +42,10 @@ export default {
     donePosts() {
       let posts = store.getters.getPosts;
       return posts;
+    },
+    doneAlbums() {
+      let albums = store.getters.getAlbums;
+      return albums;
     }
   }
 }
