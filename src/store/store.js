@@ -114,11 +114,16 @@ export default new Vuex.Store({
                         all[x]['__posts'].push(state.posts[i]);
                     }
                 }
-                for (let i in state.posts) {
+                for (let i in state.albums) {
                     if (state.albums[i]['userId'] == all[x]['id']) {
                         all[x]['__albums'].push(state.albums[i]);
                     }
                 }
+                // for (let i in state.photos) {
+                //     if (state.photos[i]['albumId'] == all[x]['id']) {
+                //         all[x]['__photos'].push(state.photos[i]);
+                //     }
+                // }
             }
             return all;
         }

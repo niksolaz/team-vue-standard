@@ -14,10 +14,16 @@
             </div>
             <div>
               <h4><strong>Albums of {{item.name}}</strong></h4>
-              <div class="border mx-5" v-for="(album,f) in item.__albums" :key="f">
+              <div class="border mx-5" v-for="(album,a) in item.__albums" :key="a">
                 <p class="px-5">{{album.title}}</p>
               </div>
             </div>
+            <!-- <div>
+              <h4><strong>Photos of {{item.name}}</strong></h4>
+              <div class="border mx-5" v-for="(photo,p) in item.__photos" :key="p">
+                <img :src="photo.thumbnailUrl" :alt="photo.title" width="40" height="40"/>
+              </div>
+            </div> -->
         </div>
       </div>
       <!-- <div class="col-6">
