@@ -2,7 +2,25 @@
   <div id="app">
     <Principale />
     <div class="row">
-      <div class="col-6">
+      <div class="col-12">
+        <div v-for="(item,i) in getAllItems" :key="i">
+            <h2 class="bg-primary"><strong>{{item.name}}</strong></h2>
+            <div>
+              <h4><strong>Posts of {{item.name}}</strong></h4>
+              <div class="border mx-5" v-for="(post,k) in item.__posts" :key="k">
+                <h6>{{post.id}} - {{post.title}}</h6>
+                <p class="px-5">{{post.body}}</p>
+              </div>
+            </div>
+            <div>
+              <h4><strong>Albums of {{item.name}}</strong></h4>
+              <div class="border mx-5" v-for="(album,f) in item.__albums" :key="f">
+                <p class="px-5">{{album.title}}</p>
+              </div>
+            </div>
+        </div>
+      </div>
+      <!-- <div class="col-6">
         <div v-for="(user,i) in doneUsers" :key="i">{{user}}</div>
       </div>
       <div class="col-6">
@@ -10,7 +28,7 @@
       </div>
       <div class="col-12">
         <div v-for="(album,k) in doneAlbums" :key="k">{{album}}</div>
-      </div>
+      </div> -->
     </div>
 
   </div>
@@ -26,13 +44,15 @@ export default {
   },
   beforeMount() {
     const itemsUsers = sessionStorage.getItem('users');
-    store.dispatch('getUsers',JSON.parse(itemsUsers));
     const itemsPosts = sessionStorage.getItem('posts');
-    store.dispatch('getPosts',JSON.parse(itemsPosts));
     const itemsAlbums = sessionStorage.getItem('albums');
+    const itemsPhotos = sessionStorage.getItem('photos');
+
+    store.dispatch('getUsers',JSON.parse(itemsUsers));
+    store.dispatch('getPosts',JSON.parse(itemsPosts));
     store.dispatch('getAlbums',JSON.parse(itemsAlbums));
-  },
-  mounted() {
+    store.dispatch('getPhotos',JSON.parse(itemsPhotos));
+
   },
   computed: {
     doneUsers() {
@@ -46,6 +66,14 @@ export default {
     doneAlbums() {
       let albums = store.getters.getAlbums;
       return albums;
+    },
+    donePhotos() {
+      let photos = store.getters.getPhotos;
+      return photos;
+    },
+    getAllItems() {
+      let items = store.getters.getAllItems;
+      return items;
     }
   }
 }

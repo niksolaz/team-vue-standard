@@ -8,7 +8,8 @@ export default new Vuex.Store({
     state: {
         users: [],
         posts: [],
-        albums: []
+        albums: [],
+        photos: []
     },
     mutations: {
         setUsers(state, users) {
@@ -19,11 +20,17 @@ export default new Vuex.Store({
         },
         setAlbums(state, albums) {
             state.albums = albums
+        },
+        setPhotos(state, photos) {
+            state.photos = photos
+        },
+        setMatchAll(state, matchAll) {
+            state.matchAll = matchAll
         }
     },
     actions: {
         getUsers(usersContext, users) {
-            if (sessionStorage.getItem('users') === null) {
+            if (users === null) {
                 return axios.get('https://jsonplaceholder.typicode.com/users/')
                     .then(res => {
                         sessionStorage.setItem('users', JSON.stringify(res.data))
@@ -37,7 +44,7 @@ export default new Vuex.Store({
             }
         },
         getPosts(postsContext, posts) {
-            if (sessionStorage.getItem('posts') === null) {
+            if (posts === null) {
                 return axios.get('https://jsonplaceholder.typicode.com/posts/')
                     .then(res => {
                         sessionStorage.setItem('posts', JSON.stringify(res.data))
@@ -51,7 +58,7 @@ export default new Vuex.Store({
             }
         },
         getAlbums(albumsContext, albums) {
-            if (sessionStorage.getItem('albums') === null) {
+            if (albums === null) {
                 return axios.get('https://jsonplaceholder.typicode.com/albums/')
                     .then(res => {
                         sessionStorage.setItem('albums', JSON.stringify(res.data))
@@ -62,6 +69,20 @@ export default new Vuex.Store({
                     })
             } else {
                 albumsContext.commit('setAlbums', albums)
+            }
+        },
+        getPhotos(photosContext, photos) {
+            if (photos === null) {
+                return axios.get('https://jsonplaceholder.typicode.com/photos/')
+                    .then(res => {
+                        sessionStorage.setItem('photos', JSON.stringify(res.data))
+                        photosContext.commit('setPhotos', res.data)
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    })
+            } else {
+                photosContext.commit('setPhotos', photos)
             }
         },
 
@@ -75,6 +96,31 @@ export default new Vuex.Store({
         },
         getAlbums(state) {
             return state.albums;
+        },
+        getPhotos(state) {
+            return state.photos;
+        },
+        getAllItems(state) {
+            let all = []
+            for (let i in state.users) {
+                state.users[i]['__posts'] = [];
+                state.users[i]['__albums'] = [];
+                state.users[i]['__photos'] = [];
+                all.push(state.users[i]);
+            }
+            for (let x in all) {
+                for (let i in state.posts) {
+                    if (state.posts[i]['userId'] == all[x]['id']) {
+                        all[x]['__posts'].push(state.posts[i]);
+                    }
+                }
+                for (let i in state.posts) {
+                    if (state.albums[i]['userId'] == all[x]['id']) {
+                        all[x]['__albums'].push(state.albums[i]);
+                    }
+                }
+            }
+            return all;
         }
     }
 })
