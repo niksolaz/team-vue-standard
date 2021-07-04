@@ -154,6 +154,6 @@ export default {
     .btn-grey {
         background-color: #adb5bd;
         color:white;
-        border: 1px solid #fff;
+        border-left: 1px solid #d9dcdf;
     }
 </style>
