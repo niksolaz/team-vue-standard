@@ -15,7 +15,7 @@
                         <option value="5">Area 5</option>
                     </select>
                 </div>
-            </div>
+            </div>    
             <Area1 v-if="area1" name="A1-A2"/>
             <Area3 v-if="area3" name="A3"/>
             <Area4 v-if="area4" name="A4"/>
@@ -84,7 +84,7 @@ export default {
             area3: false,
             area4: false,
             area5: false,
-            dateR: dateRelease
+            dateR: dateRelease,
         }
     },
     methods: {
@@ -126,7 +126,7 @@ export default {
     computed: {
         release: function() {
             return this.dateR;
-        },
+        }
     }
 }
 </script>

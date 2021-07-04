@@ -9,7 +9,10 @@ export default new Vuex.Store({
         users: [],
         posts: [],
         albums: [],
-        photos: []
+        photos: [],
+        idU: 0,
+        idP: 0,
+        idA: 0
     },
     mutations: {
         setUsers(state, users) {
@@ -88,11 +91,20 @@ export default new Vuex.Store({
 
     },
     getters: {
+        getUser(state) {
+            return state.users[state.idU];
+        },
         getUsers(state) {
             return state.users;
         },
+        getPost(state) {
+            return state.posts[state.idP];
+        },
         getPosts(state) {
             return state.posts;
+        },
+        getAlbum(state) {
+            return state.albums[state.idA];
         },
         getAlbums(state) {
             return state.albums;
@@ -105,7 +117,7 @@ export default new Vuex.Store({
             for (let i in state.users) {
                 state.users[i]['__posts'] = [];
                 state.users[i]['__albums'] = [];
-                state.users[i]['__photos'] = [];
+                // state.users[i]['__photos'] = [];
                 all.push(state.users[i]);
             }
             for (let x in all) {

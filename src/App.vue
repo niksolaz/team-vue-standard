@@ -1,7 +1,25 @@
 <template>
   <div id="app">
-    <Principale />
-    
+    <!-- <Principale /> -->
+    <div class="d-flex flex-column justify-content-center">
+        <div class="col-9 mx-auto">
+          <label for="">
+            <strong>User:</strong> 
+            <input type="number" name="..." class="border mx-5 text-center" v-model="idU" min="0" :max="maxUsers" v-bind:keyup="readStoreUser(idU)">
+            <p>{{getUser}}</p>
+          </label>
+          <label for="">
+            <strong>Post:</strong> 
+            <input type="number" name="..." class="border mx-5 text-center" v-model="idP" min="0" :max="maxPosts" v-bind:keyup="readStorePost(idP)">
+            <p>{{getPost}}</p>
+          </label>
+          <label for="">
+            <strong>Album:</strong> 
+            <input type="number" name="..." class="border mx-5 text-center" v-model="idA" min="0" :max="maxAlbums" v-bind:keyup="readStoreAlbum(idA)">
+            <p>{{getAlbum}}</p>
+          </label>
+        </div>
+    </div>
     <!-- <div class="row">
       <div class="col-12">
         <div v-for="(item,i) in getAllItems" :key="i">
@@ -35,10 +53,21 @@
 <script>
 import Principale from './components/Principale'
 import store from './store/store'
+import { mapGetters } from 'vuex'
 export default {
   name: 'app',
   components: {
     Principale
+  },
+  data() {
+    return {
+      idU: 0,
+      idP: 0,
+      idA: 0,
+      maxUsers: 0,
+      maxPosts: 0,
+      maxAlbums: 0
+    }
   },
   beforeMount() {
     const itemsUsers = sessionStorage.getItem('users');
@@ -52,8 +81,26 @@ export default {
     store.dispatch('getPhotos',JSON.parse(itemsPhotos));
 
   },
-  methods: {},
+  methods: {
+    readStoreUser: function(idU) {
+        this.maxUsers = this.$store.state.users.length - 1;
+        this.$store.state.idU = idU;
+    },
+    readStorePost: function(idP) {
+        this.maxPosts = this.$store.state.posts.length - 1;
+        this.$store.state.idP = idP;
+    },
+    readStoreAlbum: function(idA) {
+        this.maxAlbums = this.$store.state.albums.length - 1;
+        this.$store.state.idA = idA;
+    },
+  },
   computed: {
+    ...mapGetters([
+      'getUser',
+      'getPost',
+      'getAlbum'
+    ]),
     doneUsers() {
       let users = store.getters.getUsers;
       return users;
