@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Principale />
-    <div class="row">
+    
+    <!-- <div class="row">
       <div class="col-12">
         <div v-for="(item,i) in getAllItems" :key="i">
             <h2 class="bg-primary"><strong>{{item.name}}</strong></h2>
@@ -18,24 +19,15 @@
                 <p class="px-5">{{album.title}}</p>
               </div>
             </div>
-            <!-- <div>
+            <div>
               <h4><strong>Photos of {{item.name}}</strong></h4>
               <div class="border mx-5" v-for="(photo,p) in item.__photos" :key="p">
                 <img :src="photo.thumbnailUrl" :alt="photo.title" width="40" height="40"/>
               </div>
-            </div> -->
+            </div>
         </div>
       </div>
-      <!-- <div class="col-6">
-        <div v-for="(user,i) in doneUsers" :key="i">{{user}}</div>
-      </div>
-      <div class="col-6">
-        <div v-for="(post,j) in donePosts" :key="j">{{post}}</div>
-      </div>
-      <div class="col-12">
-        <div v-for="(album,k) in doneAlbums" :key="k">{{album}}</div>
-      </div> -->
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -60,6 +52,7 @@ export default {
     store.dispatch('getPhotos',JSON.parse(itemsPhotos));
 
   },
+  methods: {},
   computed: {
     doneUsers() {
       let users = store.getters.getUsers;
@@ -98,4 +91,5 @@ export default {
 .text-left {
     text-align: left
 }
+
 </style>

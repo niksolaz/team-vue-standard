@@ -21,8 +21,8 @@
             <Area4 v-if="area4" name="A4"/>
             <Area5 v-if="area5" name="A5"/>
         </div>
-        <div class="d-flex flex-row-reverse bd-highlight border position-absolute bottom-0 end-0">
-            <div>Release</div>
+        <div class="d-flex flex-row-reverse bd-highlight border position-absolute grey start-0 bottom-0 end-0">
+            <div class="btn-grey p-2">{{release}}</div>
         </div>
     </div>
 </template>
@@ -32,6 +32,44 @@ import Area1 from './Area1'
 import Area3 from './Area3'
 import Area4 from './Area4'
 import Area5 from './Area5'
+
+const dd = () => {
+    let DD = new Date().getDate();
+    if (DD < 10) {
+        return '0' + DD;
+    } else {
+        return DD;
+    }
+}
+const mm = () => {
+    let MM = new Date().getMonth() + 1;
+    if (MM < 10) {
+        return '0' + MM;
+    } else {
+        return MM;
+    }
+}
+const yy = () => {
+    let YY = new Date().getFullYear();
+    return YY;
+}
+const hours = () => {
+    let h = new Date().getHours();
+    if (h < 10) {
+        return '0' + h;
+    } else {
+        return h;
+    }
+}
+const minutes = () => {
+    let mn = new Date().getMinutes();
+    if (mn < 10) {
+        return '0' + mn;
+    } else {
+        return mn;
+    }
+};
+let dateRelease = 'release_' + dd() + mm() + yy() + hours() + minutes();
 export default {
     components: {
         Area1,
@@ -46,6 +84,7 @@ export default {
             area3: false,
             area4: false,
             area5: false,
+            dateR: dateRelease
         }
     },
     methods: {
@@ -83,6 +122,11 @@ export default {
                     break;
             }
         }
+    },
+    computed: {
+        release: function() {
+            return this.dateR;
+        },
     }
 }
 </script>
@@ -103,5 +147,13 @@ export default {
     h6 {
         margin-left: 10px;
         background-color: #fff;
+    }
+    .grey {
+        background-color: #adb5bd;
+    }
+    .btn-grey {
+        background-color: #adb5bd;
+        color:white;
+        border: 1px solid #fff;
     }
 </style>
