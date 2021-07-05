@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!-- <Principale /> -->
+    <Principale />
     <div class="d-flex flex-column justify-content-center">
         <div class="col-9 mx-auto">
           <label for="">
@@ -19,6 +19,34 @@
             <p>{{getAlbum}}</p>
           </label>
         </div>
+    </div>
+    <hr>
+    <p>{{ name }}</p>
+    <input type="text" class="border" v-model="myName">
+    <button class="btn btn-warning" @click="setName(myName)">click</button>
+    <div>
+      <select
+        class="form-select"
+        v-model="selectCH"
+        @change="optionSelectedCh"
+      >
+        <option value="1">CH1</option>
+        <option value="2">CH2</option>
+        <option value="3">CH3</option>
+        <option value="4">CH4</option>
+        <option value="5">CH5</option>
+        <option value="6">CH6</option>
+        <option value="7">CH7</option>
+        <option value="8">CH8</option>
+        <option value="9">CH9</option>
+        <option value="10">CH10</option>
+        <option value="11">CH11</option>
+        <option value="12">CH12</option>
+        <option value="13">CH13</option>
+        <option value="14">CH14</option>
+        <option value="15">CH15</option>
+        <option value="16">CH16</option>
+      </select>
     </div>
     <!-- <div class="row">
       <div class="col-12">
@@ -53,7 +81,7 @@
 <script>
 import Principale from './components/Principale'
 import store from './store/store'
-import { mapGetters } from 'vuex'
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
 export default {
   name: 'app',
   components: {
@@ -66,7 +94,18 @@ export default {
       idA: 0,
       maxUsers: 0,
       maxPosts: 0,
-      maxAlbums: 0
+      maxAlbums: 0,
+      myName: "",
+      selectCH: '10',
+      firstSelectMosart: [
+        { id: 1, text: 'CH1'},
+        { id: 2, text: 'CH2'},
+        { id: 3, text: 'CH3'},
+        { id: 4, text: 'CH4'},
+        { id: 5, text: 'CH5'},
+        { id: 6, text: 'CH6'},
+        { id: 7, text: 'CH7'},
+      ]
     }
   },
   beforeMount() {
@@ -74,14 +113,16 @@ export default {
     const itemsPosts = sessionStorage.getItem('posts');
     const itemsAlbums = sessionStorage.getItem('albums');
     const itemsPhotos = sessionStorage.getItem('photos');
-
-    store.dispatch('getUsers',JSON.parse(itemsUsers));
-    store.dispatch('getPosts',JSON.parse(itemsPosts));
-    store.dispatch('getAlbums',JSON.parse(itemsAlbums));
-    store.dispatch('getPhotos',JSON.parse(itemsPhotos));
-
+    this.getUsersAction(JSON.parse(itemsUsers));
+    // store.dispatch('getUsersAction',JSON.parse(itemsUsers));
+    store.dispatch('getPostsAction',JSON.parse(itemsPosts));
+    store.dispatch('getAlbumsAction',JSON.parse(itemsAlbums));
+    store.dispatch('getPhotosAction',JSON.parse(itemsPhotos));
   },
   methods: {
+    optionSelectedCh: function() {
+      console.log(this.selectCH);
+    },
     readStoreUser: function(idU) {
         this.maxUsers = this.$store.state.users.length - 1;
         this.$store.state.idU = idU;
@@ -94,12 +135,32 @@ export default {
         this.maxAlbums = this.$store.state.albums.length - 1;
         this.$store.state.idA = idA;
     },
+    ...mapActions([
+      'getUsersAction',
+      'getPostsAction',
+      'getAlbumsAction'
+    ]),
+    ...mapMutations([
+      'setUsers',
+      'setPosts',
+      'setAlbums',
+      'setName'
+    ]),
   },
   computed: {
+    ...mapState([
+      'users',
+      'posts',
+      'albums',
+      'name'
+    ]),
     ...mapGetters([
       'getUser',
+      'getUsers',
       'getPost',
-      'getAlbum'
+      'getPosts',
+      'getAlbum',
+      'getAlbums'
     ]),
     doneUsers() {
       let users = store.getters.getUsers;

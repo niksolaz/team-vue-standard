@@ -12,9 +12,13 @@ export default new Vuex.Store({
         photos: [],
         idU: 0,
         idP: 0,
-        idA: 0
+        idA: 0,
+        name: "Nicola"
     },
     mutations: {
+        setName(state, name) {
+            state.name = name;
+        },
         setUsers(state, users) {
             state.users = users;
         },
@@ -32,7 +36,7 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        getUsers(usersContext, users) {
+        getUsersAction(usersContext, users) {
             if (users === null) {
                 return axios.get('https://jsonplaceholder.typicode.com/users/')
                     .then(res => {
@@ -46,7 +50,7 @@ export default new Vuex.Store({
                 usersContext.commit('setUsers', users)
             }
         },
-        getPosts(postsContext, posts) {
+        getPostsAction(postsContext, posts) {
             if (posts === null) {
                 return axios.get('https://jsonplaceholder.typicode.com/posts/')
                     .then(res => {
@@ -60,7 +64,7 @@ export default new Vuex.Store({
                 postsContext.commit('setPosts', posts)
             }
         },
-        getAlbums(albumsContext, albums) {
+        getAlbumsAction(albumsContext, albums) {
             if (albums === null) {
                 return axios.get('https://jsonplaceholder.typicode.com/albums/')
                     .then(res => {
@@ -74,7 +78,7 @@ export default new Vuex.Store({
                 albumsContext.commit('setAlbums', albums)
             }
         },
-        getPhotos(photosContext, photos) {
+        getPhotosAction(photosContext, photos) {
             if (photos === null) {
                 return axios.get('https://jsonplaceholder.typicode.com/photos/')
                     .then(res => {

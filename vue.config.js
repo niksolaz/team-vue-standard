@@ -37,7 +37,6 @@ const minutes = () => {
 };
 let dateRelease = '_' + dd() + mm() + yy() + hours() + minutes();
 module.exports = {
-    // outputDir: path.resolve(__dirname, "build" + dateRelease + "/dist"),
     outputDir: path.resolve(__dirname, "dist/build" + dateRelease),
     transpileDependencies: [
         'vuetify'
