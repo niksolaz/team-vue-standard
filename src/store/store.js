@@ -4,6 +4,28 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 1 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 export default new Vuex.Store({
     state: {
         users: [],
@@ -37,10 +59,14 @@ export default new Vuex.Store({
     },
     actions: {
         getUsersAction(usersContext, users) {
-            if (users === null) {
+            if (getCookie('users') == "") {
+                if (users !== null) {
+                    sessionStorage.removeItem('users');
+                }
                 return axios.get('https://jsonplaceholder.typicode.com/users/')
                     .then(res => {
                         sessionStorage.setItem('users', JSON.stringify(res.data))
+                        setCookie('users', 'prensente', 1);
                         usersContext.commit('setUsers', res.data);
                     })
                     .catch(e => {

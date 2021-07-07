@@ -6,7 +6,7 @@
           <label for="">
             <strong>User:</strong> 
             <input type="number" name="..." class="border mx-5 text-center" v-model="idU" min="0" :max="maxUsers" v-bind:keyup="readStoreUser(idU)">
-            <p>{{getUser}}</p>
+            <p :id="'color-' + idU">{{getUser}}</p>
           </label>
           <label for="">
             <strong>Post:</strong> 
@@ -198,6 +198,19 @@ export default {
 }
 .text-left {
     text-align: left
+}
+
+#color-0 {
+  color: red;
+}
+#color-1 {
+  color: blue;
+}
+#color-2 {
+  color: yellow;
+}
+#color-3 {
+  color: purple;
 }
 
 </style>
