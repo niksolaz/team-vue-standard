@@ -29,3 +29,96 @@
 
 
 //# 10 indicare almeno 3 direttive per i template
+
+var testArr = ['a', 'b', 'c', 'd', 'e', 'f'];
+var testArr2 = [{
+        'a': 123,
+        'b': 'Hello',
+        'c': {
+            'elem1': 33,
+            'elem2': 'Pippo'
+        }
+    },
+    {
+        'a': 222,
+        'b': 'Hola',
+        'c': {
+            'elem1': 33,
+            'elem2': 'Pippo'
+        }
+    },
+    {
+        'a': 456,
+        'b': 'Ciao',
+        'c': {
+            'elem1': 33,
+            'elem2': 'Pippo'
+        }
+    }
+];
+
+// && oppure AND
+/**
+ *  0  and 0 = 0  false
+ *  1  and 0 = 0  false
+ *  0  and 1 = 0  false
+ *  1  and 1 = 1  true 
+ */
+
+// || oppure OR
+/**
+ *  0  or 0 = 0  false
+ *  1  or 0 = 1  true
+ *  0  or 1 = 1  true
+ *  1  or 1 = 1  true 
+ */
+const problema200 = {
+    xArray: {
+        sub: (arr, val, elem) => {
+            try {
+                if (arr === undefined) console.log(`Error arr is ${arr}`);
+                if (arr.length > 0) {
+                    if (val === undefined && elem === undefined) {
+                        for (let i in arr) {
+                            console.log(arr[i]);
+                        }
+                    } else {
+                        if (elem === undefined || elem === null) {
+                            for (let i in arr) {
+                                console.log(arr[i][val]);
+                            }
+                        } else {
+                            for (let i in arr) {
+                                console.log(arr[i][val][elem]);
+                            }
+                        }
+                    }
+                }
+            } catch (e) {
+                console.log('Error:', e);
+            }
+        }
+    },
+    sottoProblema2: {
+        sub1: () => {
+            return 'sub1';
+        },
+        sub2: () => {
+            return 'sub2';
+        }
+    },
+    sottoProblema3: {
+        sub1: () => {
+            return 'sub1';
+        },
+        sub2: () => {
+            return 'sub2';
+        },
+        sub3: () => {
+            return 'sub3';
+        },
+        sub4: () => {
+            return 'sub4';
+        }
+    }
+}
