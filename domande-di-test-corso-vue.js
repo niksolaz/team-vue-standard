@@ -35,7 +35,7 @@ var testArr2 = [{
         'a': 123,
         'b': 'Hello',
         'c': {
-            'elem1': 33,
+            'elem1': 76,
             'elem2': 'Pippo'
         }
     },
@@ -44,15 +44,15 @@ var testArr2 = [{
         'b': 'Hola',
         'c': {
             'elem1': 33,
-            'elem2': 'Pippo'
+            'elem2': 'Lino'
         }
     },
     {
         'a': 456,
         'b': 'Ciao',
         'c': {
-            'elem1': 33,
-            'elem2': 'Pippo'
+            'elem1': 3,
+            'elem2': 'Pumba'
         }
     }
 ];
@@ -79,18 +79,12 @@ const problema200 = {
                 if (arr === undefined) console.log(`Error arr is ${arr}`);
                 if (arr.length > 0) {
                     if (val === undefined && elem === undefined) {
-                        for (let i in arr) {
-                            console.log(arr[i]);
-                        }
+                        arr.map(item => console.log(item));
                     } else {
                         if (elem === undefined || elem === null) {
-                            for (let i in arr) {
-                                console.log(arr[i][val]);
-                            }
+                            arr.map(item =>console.log(item[val]));
                         } else {
-                            for (let i in arr) {
-                                console.log(arr[i][val][elem]);
-                            }
+                            arr.map(item => console.log(item[val][elem]));
                         }
                     }
                 }
