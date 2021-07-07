@@ -74,17 +74,17 @@ var testArr2 = [{
  */
 const problema200 = {
     xArray: {
-        sub: (arr, val, elem) => {
+        sub: (arr, key1, key2) => {
             try {
                 if (arr === undefined) console.log(`Error arr is ${arr}`);
                 if (arr.length > 0) {
-                    if (val === undefined && elem === undefined) {
+                    if (key1 === undefined && key2 === undefined) {
                         arr.map(item => console.log(item));
                     } else {
-                        if (elem === undefined || elem === null) {
-                            arr.map(item =>console.log(item[val]));
+                        if (key2 === undefined || key2 === null) {
+                            arr.map(item =>console.log(item[key1]));
                         } else {
-                            arr.map(item => console.log(item[val][elem]));
+                            arr.map(item => console.log(item[key1][key2]));
                         }
                     }
                 }
