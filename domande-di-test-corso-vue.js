@@ -11,9 +11,7 @@
 
 //# 3 - strutturare una function che ritorni il valore del modello utilizzando l'oggetto della domanda 2
 
-
 //# 4  - indicare in ordine quali sono i lifecycle di Vue
-
 
 //# 5 - mapActions va inserito nelle computed o nei methods?
 
